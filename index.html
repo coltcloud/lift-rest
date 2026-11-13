@@ -13,13 +13,16 @@ p{margin:0;color:#9aa5b5;max-width:320px}
 </head><body>
 <h1 id="t">Rest</h1>
 <a class="btn" id="go" href="#">Start iPhone timer</a>
-<p>Starting your Lift Rest timer. If iPhone asks to open Shortcuts, tap Open. When the timer starts, you can close this tab.</p>
+<p>Starting your Lift Rest timer. If iPhone asks to open Shortcuts, tap Open. When the timer starts, you'll be sent back to your Lift Log.</p><p><a href="https://claude.ai/artifact/VJ4sYD36hJKApiGBN1bqJL" style="color:#7598ff">Back to Lift Log</a></p>
 <script>
 var s=parseInt(new URLSearchParams(location.search).get('t'),10);
 if(!(s>0&&s<=3600))s=90;
 document.getElementById('t').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
-var url='shortcuts://run-shortcut?name='+encodeURIComponent('Lift Rest')+'&input=text&text='+s;
+var LOG='https://claude.ai/artifact/VJ4sYD36hJKApiGBN1bqJL';
+var url='shortcuts://x-callback-url/run-shortcut?name='+encodeURIComponent('Lift Rest')+'&input=text&text='+s+'&x-success='+encodeURIComponent(LOG);
 document.getElementById('go').href=url;
 location.href=url;
+// When you come back to this tab, turn it into the Lift Log instead of leaving this page here.
+var left=false;document.addEventListener('visibilitychange',function(){if(document.hidden)left=true;else if(left)location.replace(LOG)});
 </script>
 </body></html>
