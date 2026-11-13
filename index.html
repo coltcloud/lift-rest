@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lift Rest</title>
+<style>
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  background:#0f131a;color:#e9edf3;font:17px -apple-system,BlinkMacSystemFont,sans-serif;text-align:center;padding:24px;box-sizing:border-box}
+h1{font-size:56px;margin:0;font-variant-numeric:tabular-nums}
+a.btn{background:#7598ff;color:#0b1020;text-decoration:none;font-weight:700;padding:14px 22px;border-radius:12px}
+p{margin:0;color:#9aa5b5;max-width:320px}
+</style>
+</head><body>
+<h1 id="t">Rest</h1>
+<a class="btn" id="go" href="#">Start iPhone timer</a>
+<p>Starting your Lift Rest timer. If iPhone asks to open Shortcuts, tap Open. When the timer starts, you can close this tab.</p>
+<script>
+var s=parseInt(new URLSearchParams(location.search).get('t'),10);
+if(!(s>0&&s<=3600))s=90;
+document.getElementById('t').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+var url='shortcuts://run-shortcut?name='+encodeURIComponent('Lift Rest')+'&input=text&text='+s;
+document.getElementById('go').href=url;
+location.href=url;
+</script>
+</body></html>
